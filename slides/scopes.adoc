@@ -27,13 +27,32 @@
 | Scope name | Description | CDI annotation | JSF annotation 
 | Application | A single instance for whole application. Similar to singleton. | javax.enterprise.context. **ApplicationScoped** | javax.faces.bean. ApplicationScoped
 | Session | A single instance for a HTTP session | javax.enterprise.context. **SessionScoped** | javax.faces.bean. SessionScoped
-| Request | A single instance for a HTTP request | 
-javax.enterprise.context. **RequestScoped** | javax.faces.bean. RequestScoped
 | View |  A single instance for a HTML/JSF page, including AJAX requests |
 javax.faces.view. **ViewScoped** | javax.faces.bean. ViewScoped
+| Conversation | A single instance for a custom sequence of HTTP requests | 
+javax.enterprise.context. **ConversationScoped** | N/A
+| Request | A single instance for a HTTP request | 
+javax.enterprise.context. **RequestScoped** | javax.faces.bean. RequestScoped
 | No scope | A new instance is created for each parent | 
 javax.enterprise.context. **Dependent** | javax.faces.bean. NoneScoped
 |====================
+
+== Comparison of scopes
+
+Application
+> Session
+> View
+> Request
+
+Session > Conversation >= Request
+
+
+In JSF:
+
+- View scope is ideal for stateless pages with AJAX components
+- Reuqest scope for truly stateless pages
+- Session scope should be used rarely
+- Conversation scope for sequences of pages such as wizards
 
 == CDI-based managed bean
 
@@ -55,8 +74,29 @@ public class Controller {
 
 == Injecting CDI bean into Java code
 
-`Action.java`:
+Using field injection:
 ```
-@Named
 @RequestScoped
-public class 
+public class PoliteGreetingController {
+    @Inject
+    private GreetingController greetingController;
+}
+```
+
+Using constructor injection:
+```
+@RequestScoped
+public class PoliteGreetingController {
+    private GreetingController greetingController;
+
+    PoliteGreetingController() { // empty non-private constructor required
+    }
+
+    @Inject
+    public PoliteGreetingController(GreetingController greetingController) {
+        this.greetingController = greetingController;
+    }
+
+}
+```
+
