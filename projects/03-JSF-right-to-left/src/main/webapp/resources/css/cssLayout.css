@@ -1,0 +1,61 @@
+
+#top {
+    position: relative;
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+}
+
+#bottom {
+    position: relative;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+}
+
+#sidebar {
+    float: left;
+    padding: 5px;
+    width: 200px;
+}
+
+.rtl #sidebar {
+    float: right;
+    padding: 5px;
+    width: 200px;
+}
+
+.center_content {
+    position: relative;
+    padding: 5px;
+}
+
+.left_content {
+    padding: 5px;
+    margin-left: 170px;
+}
+
+.right_content {
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+}
+
+#top a:link, #top a:visited {
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+.rtl .ui-menu .ui-menuitem-text,
+.rtl .ui-menu .ui-menuitem-link .ui-menuitem-icon,
+.rtl .ui-menu .ui-menu-list .ui-widget-header 
+.rtl .ui-menu .ui-widget-header h1, 
+.rtl .ui-menu .ui-widget-header h2, 
+.rtl .ui-menu .ui-widget-header h3, 
+.rtl .ui-menu .ui-widget-header h4,
+.rtl .ui-menu .ui-widget-header h5,
+.rtl .ui-menu .ui-widget-header h6{
+    float: right;
+}

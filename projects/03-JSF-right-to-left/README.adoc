@@ -1,0 +1,8 @@
+= Support for right-to-left languages
+
+Right-to-left rendering can be turned on on multiple levels:
+
+ - HTML5 `dir` attribute set to `ltr` or `rtl`
+ - Many Primefaces components also provide `dir` attribute
+ - Default direction in Primefaces can be set with `primefaces.DIR` context parameter, which supports expressions to set the value dynamically
+ - Components that don't provide the `dir` attibute need to be styled separately with CSS
