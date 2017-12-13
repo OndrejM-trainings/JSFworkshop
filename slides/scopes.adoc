@@ -1,0 +1,102 @@
+= JSF managed beans and scopes
+
+== Using Java objects in JSF facelets
+
+ - objects are referenced using string names
+ - objects are created (managed) by JSF
+ - an object is defined by a class and a string name
+ - an object has a scope
+ ** within a scope always a single instance
+ ** in 2 different scopes 2 different instances
+ 
+== Types of managed beans
+
+[width="100%",options="header,footer", cols="1,1,1,4,1"]
+|=====================================================
+| Type | Annotation | Java packages | Description | Usage
+| JSF managed bean | `@ManagedBean` | `javax.faces.bean` | JSF-specific managed beans, cannot be used outside JSF lifecycle | _deprecated_
+| CDI bean | `@Named` | `javax.inject`, `javax.enterprise.context`, `javax.faces.view` | Common Java EE beans for injection (CDI = Contexts & Dependency Injection). Can be used everywhere in a Java EE application. JSF only requires `@Named` annotation to give it a name | **recommended** 
+| EJB | `@Stateless`, ... | `javax.ejb` | Enterprise Java Beans - transactional managed beans. Can be used everywhere in a Java EE application. JSF only requires `@Named` annotation to give it a name | **recommended** if CDI beans not sufficient 
+| Implicit bean | N/A |  N/A | Provided by JSF automatically, using https://docs.oracle.com/javaee/7/api/javax/servlet/jsp/el/ImplicitObjectELResolver.html[ImplicitObjectELResolver]. Mostly maps with request-related attributes. Cannot be used outside JSF/JSP lifecycle. | in JSF pages
+|=====================================================
+
+== Scopes in JSF
+
+[width="100%",options="header,footer", cols="1,4,1,1"]
+|====================
+| Scope name | Description | CDI annotation | JSF annotation 
+| Application | A single instance for whole application. Similar to singleton. | javax.enterprise.context. **ApplicationScoped** | javax.faces.bean. ApplicationScoped
+| Session | A single instance for a HTTP session | javax.enterprise.context. **SessionScoped** | javax.faces.bean. SessionScoped
+| View |  A single instance for a HTML/JSF page, including AJAX requests |
+javax.faces.view. **ViewScoped** | javax.faces.bean. ViewScoped
+| Conversation | A single instance for a custom sequence of HTTP requests | 
+javax.enterprise.context. **ConversationScoped** | N/A
+| Request | A single instance for a HTTP request | 
+javax.enterprise.context. **RequestScoped** | javax.faces.bean. RequestScoped
+| No scope | A new instance is created for each parent | 
+javax.enterprise.context. **Dependent** | javax.faces.bean. NoneScoped
+|====================
+
+== Comparison of scopes
+
+Application
+> Session
+> View
+> Request
+
+Session > Conversation >= Request
+
+
+In JSF:
+
+- View scope is ideal for stateless pages with AJAX components
+- Reuqest scope for truly stateless pages
+- Session scope should be used rarely
+- Conversation scope for sequences of pages such as wizards
+
+== CDI-based managed bean
+
+`Controller.java`:
+```
+@Named
+@RequestScoped
+public class Controller {
+   public String getGreeting() {
+       return "Hello, world!";
+   } 
+}
+```
+
+`index.xhtml`:
+```
+#{controller.greeting}
+```
+
+== Injecting CDI bean into Java code
+
+Using field injection:
+```
+@RequestScoped
+public class PoliteGreetingController {
+    @Inject
+    private GreetingController greetingController;
+}
+```
+
+Using constructor injection:
+```
+@RequestScoped
+public class PoliteGreetingController {
+    private GreetingController greetingController;
+
+    PoliteGreetingController() { // empty non-private constructor required
+    }
+
+    @Inject
+    public PoliteGreetingController(GreetingController greetingController) {
+        this.greetingController = greetingController;
+    }
+
+}
+```
+

@@ -1,0 +1,10 @@
+= Practice using beans and scopes in JSF
+
+This application shows how to access CDI beans in JSF pages and in Java code.
+
+Exercises:
+
+- experiment with scopes: change scopes of beans used in contextsController and observe how it changes the behavior in scopes.xhtml
+- create a new named CDI bean and use it with a selector component. Change scopes of the bean and see for how long a value is preserved
+- add a change listener to the selector component to display selected value in another component, e.g. outputPanel. Which scope is most convenient?
+- create a new page and display the selected value from the previous page on that page. Which scope is most convenient? How can we reduce the required scope?
