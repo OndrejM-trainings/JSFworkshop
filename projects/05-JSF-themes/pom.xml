@@ -38,12 +38,11 @@
             <artifactId>slf4j-simple</artifactId>
             <version>1.6.1</version>
         </dependency>
-
-        <!-- Themes -->
+        
         <dependency>
-            <groupId>org.primefaces.themes</groupId>
-            <artifactId>all-themes</artifactId>
-            <version>1.0.10</version>
+            <groupId>omihalyi.primefaces</groupId>
+            <artifactId>test-theme</artifactId>
+            <version>0.1-SNAPSHOT</version>
         </dependency>
 
     </dependencies>
@@ -53,6 +52,10 @@
             <id>prime-repo</id>
             <name>PrimeFaces Maven Repository</name>
             <url>http://repository.primefaces.org</url>
+        </repository>
+        <repository>
+            <id>my-local-repo</id>
+            <url>file://${basedir}/m2</url>
         </repository>
     </repositories>
 
@@ -86,6 +89,19 @@
                     <scanIntervalSeconds>5</scanIntervalSeconds>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <groupId>omihalyi.primefaces</groupId>
+                    <artifactId>${artifactId}</artifactId>
+                    <version>0.1-SNAPSHOT</version>
+                    <packaging>jar</packaging>
+                    <file>${file}</file>
+                    <localRepositoryPath>${basedir}/m2</localRepositoryPath>
+                </configuration>
+            </plugin>
         </plugins>
 
     </build>
@@ -97,12 +113,14 @@
             <url>sftp://primefaces.org/var/www/repository</url>
         </repository>
     </distributionManagement>
-
+    
     <profiles>
         <profile>
             <id>dev</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>!devDisabled</name>
+                </property>
             </activation>
             <properties>
                 <jsfVersion>Mojarra-2.3.2</jsfVersion>
@@ -113,6 +131,22 @@
                     <groupId>org.primefaces</groupId>
                     <artifactId>primefaces</artifactId>
                     <version>6.1</version>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>all-themes</id>
+            <activation>
+                <property>
+                    <name>!allThemesDisabled</name>
+                </property>
+            </activation>
+            <dependencies>
+                <!-- Themes -->
+                <dependency>
+                    <groupId>org.primefaces.themes</groupId>
+                    <artifactId>all-themes</artifactId>
+                    <version>1.0.10</version>
                 </dependency>
             </dependencies>
         </profile>

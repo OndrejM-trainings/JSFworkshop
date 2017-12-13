@@ -33,6 +33,7 @@ public class ThemeService {
     @PostConstruct
     public void init() {
         themes = new ArrayList<Theme>();
+        themes.add(new Theme(-1, "Test", "test-theme"));
         themes.add(new Theme(0, "Afterdark", "afterdark"));
         themes.add(new Theme(1, "Afternoon", "afternoon"));
         themes.add(new Theme(2, "Afterwork", "afterwork"));

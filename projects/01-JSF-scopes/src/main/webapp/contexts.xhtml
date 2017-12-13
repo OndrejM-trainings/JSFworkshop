@@ -26,11 +26,16 @@
                 <p:outputLabel>View context:</p:outputLabel>
                 <p:outputPanel>#{contextsController.viewContext.created}</p:outputPanel>
 
+                <p:outputLabel>Conversation context:</p:outputLabel>
+                <p:outputPanel>#{conversationContext.created}</p:outputPanel>
+
                 <p:outputLabel>Request context:</p:outputLabel>
                 <p:outputPanel>#{contextsController.requestContext.created}</p:outputPanel>
             </p:panelGrid>
 
             <p:commandButton action="#{contextsController.requestNewSession}" value="Restart session" update="contexts"/>
+            <p:commandButton action="#{contextsController.stopConversation()}" value="Restart conversation" update="contexts"/>
+            <p:commandButton value="Refresh page" ajax="false"/>
 
             <p:poll interval="1" update="contexts" />
         </h:form>

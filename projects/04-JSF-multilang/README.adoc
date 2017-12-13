@@ -1,0 +1,18 @@
+= Implementing multi-language translations
+
+== Using standard JSF locale and resource bundles configured in faces-config.xml
+
+* JSF can automatically guess the most appropriate language for the user based on locales in the browser
+* Texts are translated using resource bundles referred to using their variable name
+* Translations are stored with the application inside property files and no easy way to customize this
+
+== Using custom resource bundles
+
+* A bean that extends ResourceBundle with `@Named` annotation can be used for translations without breaking existing code
+* This custom resource bundle can provide translations in a flexible way (read translations from DB, etc.)
+
+== List of possible scenarios
+
+* How to translate enumerations
+* How to translate in Java code
+* How to pass arguments to translations

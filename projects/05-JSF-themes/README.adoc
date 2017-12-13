@@ -1,3 +1,20 @@
 = A demo application for PrimeFaces themes
 
 Derived from Primefaces Showcase Demo application: https://github.com/primefaces/showcase.git
+
+
+== Add a custom theme
+
+A custom Primefaces theme JAR can be installed with the following command:
+
+```
+mvn install:install-file -DartifactId=<artifactId> -Dpath=<path-to-file>
+```
+
+Then add the theme to `ThemeService.java`.
+
+== Creating a custom theme using Themeroller
+
+1. Use http://jqueryui.com/themeroller/ to edit a new theme, then press save.
+2. On the save screen, unselect all components and download version 1.9.2
+3. Use tool to generate PF theme JAR from the downloaded Themeroller file: https://sourceforge.net/projects/primefacestheme/

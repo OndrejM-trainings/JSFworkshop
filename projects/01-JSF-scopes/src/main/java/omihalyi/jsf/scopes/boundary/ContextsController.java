@@ -13,6 +13,9 @@ public class ContextsController {
     private ViewContext viewContext;
     private RequestContext requestContext;
 
+    @Inject
+    private Conversation conversation;
+
     ContextsController() {
     }
     
@@ -43,5 +46,11 @@ public class ContextsController {
     public void requestNewSession() {
         HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
         request.getSession().invalidate();
+    }
+    
+    public void stopConversation() {
+        if (!conversation.isTransient()) {
+            conversation.end();
+        }
     }
 }
