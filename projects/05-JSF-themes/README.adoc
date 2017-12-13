@@ -1,0 +1,3 @@
+= A demo application for PrimeFaces themes
+
+Derived from Primefaces Showcase Demo application: https://github.com/primefaces/showcase.git
