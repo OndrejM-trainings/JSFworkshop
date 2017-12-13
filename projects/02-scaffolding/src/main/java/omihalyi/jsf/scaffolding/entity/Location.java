@@ -3,18 +3,18 @@
  */
 package omihalyi.jsf.scaffolding.entity;
 
-import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 
+/**
+ * @author Ondrej Mihalyi
+ */
 @Entity
-public class Cargo implements Serializable {
+public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,9 +23,9 @@ public class Cargo implements Serializable {
     @Basic
     private String name;
 
-    @OneToMany(targetEntity = Location.class)
-    @OrderBy("orderIndex")
-    private List<Location> locations;
+    @Column(name = "orderIndex")
+    @Basic
+    private String orderIndex;
 
     public Long getId() {
         return this.id;
@@ -43,12 +43,12 @@ public class Cargo implements Serializable {
         this.name = name;
     }
 
-    public List<Location> getLocations() {
-        return this.locations;
+    public String getOrderIndex() {
+        return this.orderIndex;
     }
 
-    public void setLocations(List<Location> locations) {
-        this.locations = locations;
+    public void setOrderIndex(String orderIndex) {
+        this.orderIndex = orderIndex;
     }
 
 }
