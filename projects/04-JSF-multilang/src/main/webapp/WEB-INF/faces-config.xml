@@ -8,6 +8,7 @@
             <default-locale>cs</default-locale>
             <supported-locale>en</supported-locale>
             <supported-locale>cs</supported-locale>
+            <supported-locale>ar</supported-locale>
         </locale-config>
         <resource-bundle>
             <var>translateStatic</var>

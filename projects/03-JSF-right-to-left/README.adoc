@@ -2,7 +2,10 @@
 
 Right-to-left rendering can be turned on on multiple levels:
 
- - HTML5 `dir` attribute set to `ltr` or `rtl`
+ - HTML5 `dir` attribute set to `ltr` or `rtl` changes direction of components in the browser
+ ** the value of this attribute cascades so it's enough to set it on a top-level element
  - Many Primefaces components also provide `dir` attribute
- - Default direction in Primefaces can be set with `primefaces.DIR` context parameter, which supports expressions to set the value dynamically
+ - Default direction in Primefaces can be set with `primefaces.DIR` context parameter in `web.xml`
+ ** the value can be an EL expression to set the value dynamically
  - Components that don't provide the `dir` attibute need to be styled separately with CSS
+ ** it's a good practice to mark a top-level element with a special class if RTL is in place

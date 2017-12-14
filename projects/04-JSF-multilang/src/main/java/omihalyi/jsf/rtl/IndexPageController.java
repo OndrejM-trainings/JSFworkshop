@@ -12,7 +12,4 @@ public class IndexPageController extends BaseController {
     @Translation
     private ResourceBundle translate;
     
-    {
-        translate.getString("index.top");
-    }
 }

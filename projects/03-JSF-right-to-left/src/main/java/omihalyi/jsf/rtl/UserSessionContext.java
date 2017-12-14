@@ -1,12 +1,13 @@
 package omihalyi.jsf.rtl;
 
+import java.io.Serializable;
 import javax.enterprise.context.*;
-import javax.inject.Named;
+import javax.inject.*;
 
 @SessionScoped
 @Named
-public class ApplicationContext {
-
+public class UserSessionContext implements Serializable {
+    
     private boolean ltr = false;
 
     public boolean isLtr() {
@@ -20,5 +21,5 @@ public class ApplicationContext {
     void toggleLtr() {
         ltr = !ltr;
     }
-
+    
 }

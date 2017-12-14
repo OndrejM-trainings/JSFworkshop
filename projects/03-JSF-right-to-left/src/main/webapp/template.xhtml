@@ -15,24 +15,22 @@
     </h:head>
 
     <h:body>
-        <f:view locale="#{applicationContext.language}">
-            <div class="#{applicationContext.textDirection}" dir="#{applicationContext.textDirection}">
-                <div id="top">
-                    <ui:insert name="top">#{translate['index.top']}</ui:insert>
+        <div class="#{userSessionContext.textDirection}" dir="#{userSessionContext.textDirection}">
+            <div id="top">
+                <ui:insert name="top">Top</ui:insert>
+            </div>
+            <div>
+                <div id="sidebar">
+                    <ui:insert name="sidebar">Right</ui:insert>
                 </div>
-                <div>
-                    <div id="sidebar">
-                        <ui:insert name="sidebar">Right</ui:insert>
-                    </div>
-                    <div id="content" class="left_content">
-                        <ui:insert name="content">Content</ui:insert>
-                    </div>
-                </div>
-                <div id="bottom">
-                    <ui:insert name="bottom">Bottom</ui:insert>
+                <div id="content" class="left_content">
+                    <ui:insert name="content">Content</ui:insert>
                 </div>
             </div>
-        </f:view>
+            <div id="bottom">
+                <ui:insert name="bottom">Bottom</ui:insert>
+            </div>
+        </div>
 
     </h:body>
 

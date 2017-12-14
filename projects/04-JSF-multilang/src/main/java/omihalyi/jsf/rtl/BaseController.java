@@ -5,7 +5,7 @@ import javax.inject.Inject;
 public abstract class BaseController {
 
     @Inject
-    protected ApplicationContext appContext;
+    protected UserSessionContext appContext;
 
     public String getTextDirection() {
         return appContext.getTextDirection();

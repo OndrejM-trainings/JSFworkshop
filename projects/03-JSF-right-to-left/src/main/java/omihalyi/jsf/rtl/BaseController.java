@@ -5,14 +5,14 @@ import javax.inject.Inject;
 public abstract class BaseController {
 
     @Inject
-    protected ApplicationContext appContext;
+    protected UserSessionContext sessionContext;
 
     public String getTextDirection() {
-        return appContext.getTextDirection();
+        return sessionContext.getTextDirection();
     }
     
     public void toggleTextDirection() {
-        appContext.toggleLtr();
+        sessionContext.toggleLtr();
     }
 
 }
