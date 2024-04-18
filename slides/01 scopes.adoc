@@ -50,7 +50,7 @@ Session > Conversation >= Request
 In JSF:
 
 - View scope is ideal for stateless pages with AJAX components
-- Reuqest scope for truly stateless pages
+- Request scope for truly stateless pages
 - Session scope should be used rarely
 - Conversation scope for sequences of pages such as wizards
 
